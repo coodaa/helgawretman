@@ -17,6 +17,8 @@ export default function RootLayout({
           backgroundColor: "black",
           color: "white",
           fontFamily: "Arial, Helvetica, sans-serif",
+          WebkitFontSmoothing: "antialiased",
+          MozOsxFontSmoothing: "grayscale",
         }}
       >
         {children}
