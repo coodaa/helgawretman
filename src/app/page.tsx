@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <main
       style={{
-        minHeight: "100vh",
+        minHeight: "calc(100vh - 80px)",
         width: "100%",
         padding: "20px",
         boxSizing: "border-box",
@@ -15,33 +15,28 @@ export default function Home() {
     >
       <h1
         style={{
-          fontSize: "clamp(2rem, 8vw, 4rem)",
+          fontSize: "clamp(2rem, 8vw, 5rem)",
           fontWeight: 700,
-          margin: 0,
+          margin: "0 0 1rem 0",
         }}
       >
         Helga Wretman
       </h1>
 
-      {/* Erste Zeile */}
       <p
         style={{
-          marginTop: "1rem",
-          fontSize: "clamp(1.2rem, 5vw, 1.8rem)",
-          opacity: 0.9,
-          lineHeight: 1.2,
-          marginBottom: "0.3rem",
+          fontSize: "clamp(1rem, 4vw, 1.5rem)",
+          opacity: 0.7,
         }}
       >
         Artist
       </p>
 
-      {/* Zweite Zeile */}
       <p
         style={{
-          fontSize: "clamp(1rem, 4vw, 1.4rem)",
-          opacity: 0.6,
-          lineHeight: 1.2,
+          marginTop: "0.5rem",
+          fontSize: "clamp(0.9rem, 3vw, 1.2rem)",
+          opacity: 0.5,
         }}
       >
         Website Coming Soon
