@@ -2,45 +2,56 @@ export default function Home() {
   return (
     <main
       style={{
-        minHeight: "calc(100vh - 80px)",
+        minHeight: "100vh",
         width: "100%",
-        padding: "20px",
-        boxSizing: "border-box",
         display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
         justifyContent: "center",
-        textAlign: "center",
+        alignItems: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <h1
+      {/* BACKGROUND IMAGE */}
+      <div
         style={{
-          fontSize: "clamp(2rem, 8vw, 5rem)",
-          fontWeight: 700,
-          margin: "0 0 1rem 0",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundImage: "url('/in-group_photo_JohnHolten.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          zIndex: "-1",
+          filter: "brightness(0.5)", // dunkelt das Foto ab für bessere Lesbarkeit
         }}
-      >
-        Helga Wretman
-      </h1>
+      />
 
-      <p
+      {/* CONTENT */}
+      <div
         style={{
-          fontSize: "clamp(1rem, 4vw, 1.5rem)",
-          opacity: 0.7,
+          textAlign: "center",
+          color: "white",
+          padding: "20px",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        Artist
-      </p>
+        <h1
+          style={{
+            fontSize: "clamp(1.5rem, 7vw, 2.3rem)",
+            fontWeight: 700,
+            marginBottom: "0rem",
+            letterSpacing: "0.04em",
+            marginTop: "2.5em",
+          }}
+        >
+          Helga Wretman
+        </h1>
 
-      <p
-        style={{
-          marginTop: "0.5rem",
-          fontSize: "clamp(0.9rem, 3vw, 1.2rem)",
-          opacity: 0.5,
-        }}
-      >
-        Website Coming Soon
-      </p>
+
+      </div>
     </main>
   );
 }
