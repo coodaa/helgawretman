@@ -6,12 +6,38 @@ export default function Contact() {
         width: "100%",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",   // ← macht es vertikal zentriert
-        paddingTop: "60px",     // ← damit die NavBar nichts überlappt
+        alignItems: "center",
+        paddingTop: "60px", // NavBar offset
         boxSizing: "border-box",
         textAlign: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* BACKGROUND IMAGE */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url('/image.png')", // <-- dein Bild
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          zIndex: -2,
+        }}
+      />
+
+      {/* DARK OVERLAY damit Text lesbar bleibt */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "rgba(0,0,0,0.55)",
+          zIndex: -1,
+        }}
+      />
+
+      {/* CONTENT */}
       <div
         style={{
           maxWidth: "600px",
@@ -21,8 +47,9 @@ export default function Contact() {
         <h1
           style={{
             fontSize: "clamp(2rem, 6vw, 3.2rem)",
-            marginBottom: "1.2rem",
+            marginBottom: "1.5rem",
             fontWeight: 700,
+            color: "white",
           }}
         >
           Contact
@@ -30,40 +57,38 @@ export default function Contact() {
 
         <p
           style={{
-            fontSize: "clamp(1rem, 3vw, 1.3rem)",
-            lineHeight: 1.6,
-            opacity: 0.85,
-            marginBottom: "2rem",
+            fontSize: "1.2rem",
+            margin: "10px 0",
           }}
         >
-          For inquiries regarding performances, exhibitions, collaborations,
-          or interviews, please feel free to reach out.
-        </p>
-
-        <p style={{ fontSize: "1.2rem", margin: "4px 0", opacity: 0.9 }}>
           <a
             href="mailto:helga@helgawretman.com"
             style={{
               color: "white",
-              textDecoration: "none",
-              borderBottom: "1px solid rgba(255,255,255,0.4)",
+              textDecoration: "none",       // <-- NICHT unterstrichen
+              fontWeight: 300,
             }}
           >
-            helga@helgawretman.com
+            email: helga@helgawretman.com
           </a>
         </p>
 
-        <p style={{ fontSize: "1.2rem", margin: "4px 0", opacity: 0.9 }}>
+        <p
+          style={{
+            fontSize: "1.2rem",
+            margin: "10px 0",
+          }}
+        >
           <a
             href="https://instagram.com/helgawretman"
             target="_blank"
             style={{
               color: "white",
-              textDecoration: "none",
-              borderBottom: "1px solid rgba(255,255,255,0.4)",
+              textDecoration: "none",        // <-- NICHT unterstrichen
+              fontWeight: 300,
             }}
           >
-            @helgawretman
+            instagram: @helgawretman
           </a>
         </p>
       </div>

@@ -38,7 +38,7 @@ export default function About() {
           disappearance. Through carefully staged actions and moments of
           improvisation, she creates situations in which the choreography of
           everyday life becomes visible and the body becomes a tool for
-          reflection, resistance, and reinvention.
+          reflection, resistance, and reinvention. She is also a active stuntwoman working since over a decate on international film productions
         </p>
       </div>
     </main>

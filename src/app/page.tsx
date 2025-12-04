@@ -11,20 +11,34 @@ export default function Home() {
         overflow: "hidden",
       }}
     >
-      {/* BACKGROUND IMAGE */}
+      {/* BACKGROUND VIDEO */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transform: "translate(-50%, -50%)",
+          zIndex: -2,
+        }}
+      >
+        <source src="/helgafrontpage.mov" type="video/quicktime" />
+        <source src="/helgafrontpage.mov" type="video/mp4" />
+      </video>
+
+      {/* LIGHT OVERLAY so black text is readable */}
       <div
         style={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundImage: "url('/in-group_photo_JohnHolten.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          zIndex: "-1",
-          filter: "brightness(0.5)", // dunkelt das Foto ab für bessere Lesbarkeit
+          inset: 0,
+          backgroundColor: "rgba(255,255,255,0.25)", // ← helles Overlay
+          zIndex: -1,
         }}
       />
 
@@ -32,7 +46,7 @@ export default function Home() {
       <div
         style={{
           textAlign: "center",
-          color: "white",
+          color: "black", // ← SCHWARZER TEXT
           padding: "20px",
           position: "relative",
           zIndex: 2,
@@ -40,17 +54,15 @@ export default function Home() {
       >
         <h1
           style={{
-            fontSize: "clamp(1.5rem, 7vw, 2.3rem)",
+            fontSize: "clamp(1.5rem, 7vw, 2.7rem)",
             fontWeight: 700,
-            marginBottom: "0rem",
             letterSpacing: "0.04em",
             marginTop: "2.5em",
+            color: "black", // important
           }}
         >
           Helga Wretman
         </h1>
-
-
       </div>
     </main>
   );
