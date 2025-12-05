@@ -24,16 +24,29 @@ export default function About() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          zIndex: -2,
+          zIndex: -3,
         }}
       />
 
-      {/* LIGHT OVERLAY */}
+      {/* WHITE BLUR OVERLAY (makes it soft & readable) */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundColor: "rgba(255,255,255,0.25)",
+          backgroundColor: "rgba(255,255,255,0.45)", // heller Schleier
+          backdropFilter: "blur(1px)",                // Weichzeichner
+          WebkitBackdropFilter: "blur(1px)",
+          zIndex: -2,
+        }}
+      />
+
+      {/* EXTRA WHITE SOFT GLOW (very subtle) */}
+      <div
+        style={{
+          position: "absolute",
+          inset: "0 0 0 0",
+          background:
+            "linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.12))",
           zIndex: -1,
         }}
       />
@@ -99,7 +112,7 @@ export default function About() {
             style={{
               color: "black",
               fontSize: "1rem",
-               fontWeight: "bold",
+              fontWeight: "bold",
               textDecoration: "underline",
             }}
           >

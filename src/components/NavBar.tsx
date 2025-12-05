@@ -19,15 +19,14 @@ export default function NavBar() {
           justifyContent: "space-between",
           alignItems: "center",
           zIndex: 1000,
-          background: "transparent",   // ← TRANSPARENT
-          backdropFilter: "none",       // ← keine Unschärfe, pure Transparenz
+          background: "transparent",
         }}
       >
         {/* LOGO */}
         <a
           href="/"
           style={{
-            color: "black",              // ← SCHWARZ
+            color: "black",
             textDecoration: "none",
             fontWeight: 700,
             letterSpacing: "0.08em",
@@ -80,7 +79,7 @@ export default function NavBar() {
             style={{
               width: "100%",
               height: "3px",
-              backgroundColor: "black",  // ← SCHWARZ
+              backgroundColor: "black",
               transition: "0.3s",
               transform: open ? "rotate(45deg) translate(5px, 6px)" : "none",
             }}
@@ -89,7 +88,7 @@ export default function NavBar() {
             style={{
               width: "100%",
               height: "3px",
-              backgroundColor: "black",  // ← SCHWARZ
+              backgroundColor: "black",
               opacity: open ? 0 : 1,
               transition: "0.3s",
             }}
@@ -98,7 +97,7 @@ export default function NavBar() {
             style={{
               width: "100%",
               height: "3px",
-              backgroundColor: "black",  // ← SCHWARZ
+              backgroundColor: "black",
               transition: "0.3s",
               transform: open ? "rotate(-45deg) translate(5px, -6px)" : "none",
             }}
@@ -106,14 +105,13 @@ export default function NavBar() {
         </button>
       </header>
 
-      {/* FULLSCREEN OVERLAY MENU */}
+      {/* FULLSCREEN MOBILE MENU */}
       <div
         style={{
           position: "fixed",
           inset: 0,
           width: "100%",
           height: "100vh",
-          backgroundColor: "black",   // bleibt schwarz
           display: open ? "flex" : "none",
           flexDirection: "column",
           justifyContent: "center",
@@ -122,11 +120,43 @@ export default function NavBar() {
           zIndex: 900,
         }}
       >
+        {/* BACKGROUND VIDEO nur mobil */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            transform: "translate(-50%, -50%)",
+            zIndex: -2,
+            display: "block",
+          }}
+        >
+          <source src="/neckturnermobil_v2.mp4" type="video/mp4" />
+        </video>
+
+        {/* Weißer Overlay damit Text lesbar bleibt */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "rgba(255,255,255,0.7)",
+            zIndex: -1,
+          }}
+        />
+
+        {/* MENU LINKS */}
         <a
           href="/works"
           onClick={() => setOpen(false)}
           style={{
-            color: "white",
+            color: "black",
             fontSize: "2rem",
             textDecoration: "none",
             fontWeight: 500,
@@ -138,7 +168,7 @@ export default function NavBar() {
           href="/about"
           onClick={() => setOpen(false)}
           style={{
-            color: "white",
+            color: "black",
             fontSize: "2rem",
             textDecoration: "none",
             fontWeight: 500,
@@ -150,7 +180,7 @@ export default function NavBar() {
           href="/contact"
           onClick={() => setOpen(false)}
           style={{
-            color: "white",
+            color: "black",
             fontSize: "2rem",
             textDecoration: "none",
             fontWeight: 500,
