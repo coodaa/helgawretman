@@ -14,20 +14,42 @@ export default function Contact() {
         overflow: "hidden",
       }}
     >
-      {/* BACKGROUND IMAGE */}
-      <div
+      {/* BACKGROUND VIDEO */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
         style={{
           position: "absolute",
-          inset: 0,
-          backgroundImage: "url('/image.png')", // <-- dein Bild
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
+          top: "50%",
+          left: "50%",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transform: "translate(-50%, -50%)",
           zIndex: -2,
         }}
-      />
+      >
+        {/* Desktop */}
+        <source
+          src="/contact-desktop.mp4"
+          type="video/mp4"
+          media="(min-width: 768px)"
+        />
 
-      {/* DARK OVERLAY damit Text lesbar bleibt */}
+        {/* Mobile */}
+        <source
+          src="/contact-mobil.MOV"
+          type="video/mp4"     // wichtig: MOV als mp4 deklarieren
+          media="(max-width: 767px)"
+        />
+
+        {/* Fallback */}
+        <source src="/contact-desktop.mp4" type="video/mp4" />
+      </video>
+
+      {/* DARK OVERLAY für Lesbarkeit */}
       <div
         style={{
           position: "absolute",
@@ -42,6 +64,8 @@ export default function Contact() {
         style={{
           maxWidth: "600px",
           padding: "0 20px",
+          position: "relative",
+          zIndex: 10,
         }}
       >
         <h1
@@ -59,13 +83,14 @@ export default function Contact() {
           style={{
             fontSize: "1.2rem",
             margin: "10px 0",
+            color: "white",
           }}
         >
           <a
             href="mailto:helga@helgawretman.com"
             style={{
               color: "white",
-              textDecoration: "none",       // <-- NICHT unterstrichen
+              textDecoration: "none",
               fontWeight: 300,
             }}
           >
@@ -77,6 +102,7 @@ export default function Contact() {
           style={{
             fontSize: "1.2rem",
             margin: "10px 0",
+            color: "white",
           }}
         >
           <a
@@ -84,7 +110,7 @@ export default function Contact() {
             target="_blank"
             style={{
               color: "white",
-              textDecoration: "none",        // <-- NICHT unterstrichen
+              textDecoration: "none",
               fontWeight: 300,
             }}
           >
