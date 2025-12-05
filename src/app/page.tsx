@@ -60,7 +60,7 @@ export default function Home() {
       <div
         style={{
           textAlign: "center",
-          color: "black",
+          color: "white",
           padding: "20px",
           position: "relative",
           zIndex: 2,
