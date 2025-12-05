@@ -1,17 +1,42 @@
 import NavBar from "../components/NavBar";
 
 export const metadata = {
-  title: "Helga Wretman – Performance Artist",
-  description:
-    "Helga Wretman is a Berlin-based artist working across performance, video, physical intervention and digital culture. Official portfolio and works.",
+  title: "Helga Wretman",
+  description: "Official Website — Helga Wretman",
 
+  // OPEN GRAPH (PREVIEW FOR WHATSAPP / INSTAGRAM DM / MESSENGER)
+  openGraph: {
+    title: "Helga Wretman",
+    description: "Official Website",
+    url: "https://helgawretman.com",
+    siteName: "Helga Wretman",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Helga Wretman",
+      },
+    ],
+  },
+
+  // TWITTER CARD
+  twitter: {
+    card: "summary_large_image",
+    title: "Helga Wretman",
+    description: "Official Website",
+    creator: "@helgawretman",
+    images: ["/og-image.jpg"],
+  },
+
+  // SEO
   keywords: [
     "Helga Wretman",
-    "performance art",
     "Berlin artist",
     "video art",
     "digital culture",
-    "performance artist Berlin",
     "contemporary art",
     "body and technology",
     "stunt artist",
@@ -21,7 +46,6 @@ export const metadata = {
   authors: [{ name: "Helga Wretman" }],
   creator: "Helga Wretman",
   publisher: "Helga Wretman",
-  category: "Art",
 
   robots: {
     index: true,
@@ -37,35 +61,6 @@ export const metadata = {
 
   alternates: {
     canonical: "https://helgawretman.com",
-    languages: {
-      en: "https://helgawretman.com",
-    },
-  },
-
-  openGraph: {
-    title: "Helga Wretman – Performance Artist",
-    description:
-      "Official website of Helga Wretman, Berlin-based performance and video artist.",
-    url: "https://helgawretman.com",
-    siteName: "Helga Wretman",
-    locale: "en_US",
-    type: "website",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Helga Wretman Performance Artist",
-      },
-    ],
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "Helga Wretman – Performance Artist",
-    description: "Official portfolio of artist Helga Wretman.",
-    creator: "@helgawretman",
-    images: ["/og-image.jpg"],
   },
 
   icons: {
@@ -78,7 +73,6 @@ export const metadata = {
   },
 
   manifest: "/site.webmanifest",
-
   themeColor: "#000000",
   referrer: "origin-when-cross-origin",
 };
@@ -87,10 +81,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        {/* Preload Video für Performance */}
+        {/* Preload Video */}
         <link rel="preload" as="video" href="/helga-front-desktop.mp4" />
 
-        {/* JSON-LD STRUCTURED DATA */}
+        {/* STRUCTURED DATA */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -98,7 +92,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Helga Wretman",
-              jobTitle: "Performance Artist",
               url: "https://helgawretman.com",
               image: "https://helgawretman.com/og-image.jpg",
               sameAs: ["https://instagram.com/helgawretman"],
@@ -107,13 +100,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 addressLocality: "Berlin",
                 addressCountry: "Germany",
               },
-              knowsAbout: [
-                "Performance Art",
-                "Video Art",
-                "Digital Culture",
-                "Body and Technology",
-                "Stunt Performance",
-              ],
             }),
           }}
         />
@@ -123,7 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         style={{
           margin: 0,
           padding: 0,
-          backgroundColor: "black",
+          backgroundColor: "white",
           color: "white",
           fontFamily: "Arial, Helvetica, sans-serif",
           WebkitFontSmoothing: "antialiased",

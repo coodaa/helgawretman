@@ -4,7 +4,8 @@ export default function WorkDetail({
   params,
 }: {
   params: { slug: string };
-}) {  const work = works.find((w) => w.slug === params.slug);
+}) {
+  const work = works.find((w) => w.slug === params.slug);
 
   if (!work) {
     return (
@@ -25,12 +26,7 @@ export default function WorkDetail({
         color: "white",
       }}
     >
-      <h1
-        style={{
-          fontSize: "clamp(2rem, 6vw, 3rem)",
-          marginBottom: "1rem",
-        }}
-      >
+      <h1 style={{ fontSize: "clamp(2rem, 6vw, 3rem)", marginBottom: "1rem" }}>
         {work.title}
       </h1>
 
@@ -42,9 +38,9 @@ export default function WorkDetail({
         <p
           style={{
             marginBottom: "30px",
-            lineHeight: 1.5,
             opacity: 0.85,
             whiteSpace: "pre-line",
+            lineHeight: 1.5,
           }}
         >
           {work.description}
@@ -61,7 +57,6 @@ export default function WorkDetail({
               style={{
                 width: "100%",
                 marginBottom: "20px",
-                borderRadius: "0px",
               }}
             />
           );
@@ -73,8 +68,8 @@ export default function WorkDetail({
             src={file}
             style={{
               width: "100%",
-              display: "block",
               marginBottom: "20px",
+              display: "block",
             }}
           />
         );

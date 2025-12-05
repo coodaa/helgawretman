@@ -79,7 +79,7 @@ export default function NavBar() {
             style={{
               width: "100%",
               height: "3px",
-              backgroundColor: "black",
+              backgroundColor:"white",
               transition: "0.3s",
               transform: open ? "rotate(45deg) translate(5px, 6px)" : "none",
             }}
@@ -88,7 +88,7 @@ export default function NavBar() {
             style={{
               width: "100%",
               height: "3px",
-              backgroundColor: "black",
+              backgroundColor: "white",
               opacity: open ? 0 : 1,
               transition: "0.3s",
             }}
@@ -97,7 +97,7 @@ export default function NavBar() {
             style={{
               width: "100%",
               height: "3px",
-              backgroundColor: "black",
+              backgroundColor: "white",
               transition: "0.3s",
               transform: open ? "rotate(-45deg) translate(5px, -6px)" : "none",
             }}
@@ -146,7 +146,7 @@ export default function NavBar() {
           style={{
             position: "absolute",
             inset: 0,
-            background: "rgba(255,255,255,0.7)",
+            background: "rgba(124, 118, 118, 0.7)",
             zIndex: -1,
           }}
         />
@@ -156,7 +156,7 @@ export default function NavBar() {
           href="/works"
           onClick={() => setOpen(false)}
           style={{
-            color: "black",
+            color: "white",
             fontSize: "2rem",
             textDecoration: "none",
             fontWeight: 500,
@@ -168,7 +168,7 @@ export default function NavBar() {
           href="/about"
           onClick={() => setOpen(false)}
           style={{
-            color: "black",
+            color: "white",
             fontSize: "2rem",
             textDecoration: "none",
             fontWeight: 500,
@@ -180,7 +180,7 @@ export default function NavBar() {
           href="/contact"
           onClick={() => setOpen(false)}
           style={{
-            color: "black",
+            color: "white",
             fontSize: "2rem",
             textDecoration: "none",
             fontWeight: 500,
