@@ -7,7 +7,7 @@ export default function Contact() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        paddingTop: "60px", // NavBar offset
+        paddingTop: "60px",
         boxSizing: "border-box",
         textAlign: "center",
         position: "relative",
@@ -41,7 +41,7 @@ export default function Contact() {
         {/* Mobile */}
         <source
           src="/contact-mobil.MOV"
-          type="video/mp4"     // wichtig: MOV als mp4 deklarieren
+          type="video/mp4"
           media="(max-width: 767px)"
         />
 
@@ -49,7 +49,7 @@ export default function Contact() {
         <source src="/contact-desktop.mp4" type="video/mp4" />
       </video>
 
-      {/* DARK OVERLAY für Lesbarkeit */}
+      {/* DARK OVERLAY */}
       <div
         style={{
           position: "absolute",
@@ -115,6 +115,28 @@ export default function Contact() {
             }}
           >
             instagram: @helgawretman
+          </a>
+        </p>
+
+        {/* SETCARD LINK */}
+        <p
+          style={{
+            fontSize: "1.2rem",
+            margin: "20px 0 0 0",
+            color: "white",
+          }}
+        >
+          <a
+            href="/set-card_helga-wretman.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: "white",
+              textDecoration: "underline",
+              fontWeight: 300,
+            }}
+          >
+            View Setcard
           </a>
         </p>
       </div>
