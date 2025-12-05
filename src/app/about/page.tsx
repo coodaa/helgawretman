@@ -33,7 +33,7 @@ export default function About() {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundColor: "rgba(255,255,255,0.45)", // heller Schleier
+          backgroundColor: "rgba(30, 29, 29, 0.45)", // heller Schleier
           backdropFilter: "blur(1px)",                // Weichzeichner
           WebkitBackdropFilter: "blur(1px)",
           zIndex: -2,
@@ -64,7 +64,7 @@ export default function About() {
             fontSize: "clamp(1.8rem, 6vw, 3rem)",
             marginBottom: "1rem",
             fontWeight: 700,
-            color: "black",
+            color: "white",
           }}
         >
           About
@@ -75,7 +75,7 @@ export default function About() {
             fontSize: "clamp(1rem, 3.5vw, 1.2rem)",
             fontWeight: "bold",
             opacity: 0.9,
-            color: "black",
+            color: "white",
             whiteSpace: "pre-line",
             textAlign: "left",
           }}
@@ -110,7 +110,7 @@ export default function About() {
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              color: "black",
+              color: "white",
               fontSize: "1rem",
               fontWeight: "bold",
               textDecoration: "underline",

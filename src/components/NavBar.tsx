@@ -26,7 +26,7 @@ export default function NavBar() {
         <a
           href="/"
           style={{
-            color: "black",
+            color: "white",
             textDecoration: "none",
             fontWeight: 700,
             letterSpacing: "0.08em",
@@ -45,13 +45,13 @@ export default function NavBar() {
             fontSize: "1rem",
           }}
         >
-          <a href="/works" style={{ color: "black", textDecoration: "none" }}>
+          <a href="/works" style={{ color: "white", textDecoration: "none" }}>
             Works
           </a>
-          <a href="/about" style={{ color: "black", textDecoration: "none" }}>
+          <a href="/about" style={{ color: "white", textDecoration: "none" }}>
             About
           </a>
-          <a href="/contact" style={{ color: "black", textDecoration: "none" }}>
+          <a href="/contact" style={{ color: "white", textDecoration: "none" }}>
             Contact
           </a>
         </nav>
