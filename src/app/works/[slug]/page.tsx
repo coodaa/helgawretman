@@ -1,7 +1,10 @@
 import { works, getWorkFiles } from "../../data/works";
 
-export default function WorkDetail({ params }) {
-  const work = works.find((w) => w.slug === params.slug);
+export default function WorkDetail({
+  params,
+}: {
+  params: { slug: string };
+}) {  const work = works.find((w) => w.slug === params.slug);
 
   if (!work) {
     return (

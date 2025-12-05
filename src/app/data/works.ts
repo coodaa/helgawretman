@@ -19,10 +19,15 @@ export const works = [
     title: "Neck Turner",
     year: "2023",
     description: "Project description comes here.",
+      isExternal: true,
+
+  externalUrl: "https://vimeo.com/852625612?fl=pl&fe=vl",
+
+
   },
     {
-    slug: "lighting-from-a-clear-sky",
-    title: "Lighting from a clear sky",
+    slug: "lightning-from-a-clear-sky",
+    title: "Lightning from a clear sky",
     year: "2021",
     description: "Project description comes here.",
   },
@@ -34,8 +39,8 @@ export const works = [
   externalUrl: "https://fredrikwretman.se/projects/stolen-goods-2021",
 },
      {
-    slug: "in-group-foto",
-    title: "In group foto",
+    slug: "in-group-photo",
+    title: "In-group Photo",
     year: "2021",
     description: "Project description comes here.",
   },

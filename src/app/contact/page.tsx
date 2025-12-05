@@ -50,14 +50,14 @@ export default function Contact() {
       </video>
 
       {/* DARK OVERLAY */}
-      <div
+      {/* <div
         style={{
           position: "absolute",
           inset: 0,
           background: "rgba(0,0,0,0.55)",
           zIndex: -1,
         }}
-      />
+      /> */}
 
       {/* CONTENT */}
       <div

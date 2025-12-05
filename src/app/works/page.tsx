@@ -13,18 +13,32 @@ export default function WorksPage() {
         color: "white",
       }}
     >
-      {/* PURE BACKGROUND — NO OVERLAY */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage:
-            "url('/works/curiouser-and-curiouser/7.webp')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          zIndex: -2,
-        }}
-      />
+      {/* RESPONSIVE BACKGROUND */}
+      <style>
+        {`
+          .bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+          }
+
+          /* MOBILE BACKGROUND */
+          .bg {
+            background-image: url('/works/curiouser-and-curiouser/bgmobil.png');
+          }
+
+          /* DESKTOP BACKGROUND */
+          @media (min-width: 768px) {
+            .bg {
+              background-image: url('/works/curiouser-and-curiouser/7.webp');
+            }
+          }
+        `}
+      </style>
+
+      <div className="bg" />
 
       {/* TITLE */}
       <h1
@@ -44,10 +58,13 @@ export default function WorksPage() {
           {`
             .grid-container {
               display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-              gap: 28px; /* MORE SPACING BETWEEN WORKS */
-              max-width: 1300px;
+              grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+              gap: 60px;
+              max-width: 1200px;
               margin: 0 auto;
+
+              justify-content: center;
+              justify-items: center;
             }
 
             /* Tablet */
@@ -57,15 +74,15 @@ export default function WorksPage() {
               }
             }
 
-            /* Mid Desktop */
+            /* Desktop */
             @media (min-width: 900px) {
               .grid-container {
                 grid-template-columns: repeat(4, 1fr);
               }
             }
 
-            /* Large Desktop — MAX 5 COLS */
-            @media (min-width: 1200px) {
+            /* Larger desktop */
+            @media (min-width: 1300px) {
               .grid-container {
                 grid-template-columns: repeat(5, 1fr);
               }
@@ -73,15 +90,16 @@ export default function WorksPage() {
 
             .square {
               aspect-ratio: 1/1;
-              background: #00000055; /* transparent, damit Hintergrund durchscheint */
+              background: #00000055;
               overflow: hidden;
               display: block;
               transition: transform 0.25s ease;
-              border: 1px solid rgba(255,255,255,0.2);
+              border: 1px solid rgba(255,255,255,0.15);
+              width: 100%;
             }
 
             .square:hover img {
-              transform: scale(1.06);
+              transform: scale(1.05);
             }
 
             .square img {
@@ -93,27 +111,22 @@ export default function WorksPage() {
             }
 
             .title {
-              margin-top: 10px;
-              font-size: 0.95rem;
+              margin-top: 8px;
+              font-size: 0.85rem;
               opacity: 0.9;
               text-align: center;
             }
           `}
         </style>
 
+        {/* LOOP */}
         {works.map((work) => {
-          let files = [];
-
-          // PDF THUMBNAIL
-          if (work.isPdf) {
-            files = getWorkFiles("older-works");
-          } else {
-            files = getWorkFiles(work.slug);
-          }
+          const files = work.isPdf
+            ? getWorkFiles("older-works")
+            : getWorkFiles(work.slug);
 
           const thumbnail = files[0];
 
-          // EXTERNAL PROJECT
           if (work.isExternal) {
             return (
               <a
@@ -130,7 +143,6 @@ export default function WorksPage() {
             );
           }
 
-          // PDF PROJECT
           if (work.isPdf) {
             return (
               <a
@@ -147,7 +159,6 @@ export default function WorksPage() {
             );
           }
 
-          // NORMAL PROJECT
           return (
             <a
               key={work.slug}
