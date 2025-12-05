@@ -30,15 +30,22 @@ export default function About() {
             opacity: 0.9,
           }}
         >
-          Helga Wretman is an artist based in Berlin. Her practice explores the
-          shifting relationship between body, identity, and digital culture
-          through performance, video, and forms of social interaction. Her works
-          arise from an attention to the body as a site of tension—between
-          strength and fragility, exposure and control, presence and
-          disappearance. Through carefully staged actions and moments of
-          improvisation, she creates situations in which the choreography of
-          everyday life becomes visible and the body becomes a tool for
-          reflection, resistance, and reinvention. She is also a active stuntwoman working since over a decate on international film productions
+          Helga Wretman
+Born 1985 in Stockholm, Sweden.
+Lives and works in Berlin.
+After Helga graduated from the Royal Swedish Ballet School in
+Stockholm she worked as a professional dancer and performer with
+various choreographers in Berlin. In 2009 she began her career as a
+visual artist. Helga Wretman explores the fake and real, possibilities and
+limitations of body, mind and technology. Her work has been shown at
+for example Moscow Biannual for Young Art, Bundes Kunsthalle Bonn,
+Lyon Biannual, Shirn Kunsthalle, Berlinische Gallerie and Palais de
+Tokyo Helgas artistic work lives in a symbiosis with her work as a stunt
+woman. She can be seen as a stunt double in films such as “The Book
+Thief”, “The girl in the Spider’s Web”, “Eddie the Eagle”, “Hansel and
+Gretel the Witch Hunters” and “Matrix 4”
+Helga Wretman is also the creator and presenter of the Internet TV show
+"Fitness for Artists TV" on Arte Creative.
         </p>
       </div>
     </main>

@@ -28,25 +28,39 @@ export default function Home() {
           zIndex: -2,
         }}
       >
-        <source src="/helgafrontpage.mov" type="video/quicktime" />
-        <source src="/helgafrontpage.mov" type="video/mp4" />
+        {/* DESKTOP VERSION */}
+        <source
+          src="/neckturner_desktop_v2.mov"
+          type="video/mp4"            // wichtig! video/quicktime wird ignoriert
+          media="(min-width: 768px)"
+        />
+
+        {/* MOBILE VERSION */}
+        <source
+          src="/neckturnermobil_v2.mp4"
+          type="video/mp4"
+          media="(max-width: 767px)"
+        />
+
+        {/* FALLBACK (für alle Browser) */}
+        <source src="/neckturnermobil_v2.mp4" type="video/mp4" />
       </video>
 
-      {/* LIGHT OVERLAY so black text is readable */}
+      {/* HELLER OVERLAY FÜR SCHWARZEN TEXT */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundColor: "rgba(255,255,255,0.25)", // ← helles Overlay
+          backgroundColor: "rgba(255, 255, 255, 0.25)",
           zIndex: -1,
         }}
       />
 
-      {/* CONTENT */}
+      {/* TEXT / CONTENT */}
       <div
         style={{
           textAlign: "center",
-          color: "black", // ← SCHWARZER TEXT
+          color: "black",
           padding: "20px",
           position: "relative",
           zIndex: 2,
@@ -58,7 +72,6 @@ export default function Home() {
             fontWeight: 700,
             letterSpacing: "0.04em",
             marginTop: "2.5em",
-            color: "black", // important
           }}
         >
           Helga Wretman

@@ -19,14 +19,15 @@ export default function NavBar() {
           justifyContent: "space-between",
           alignItems: "center",
           zIndex: 1000,
-          background: "black",
+          background: "transparent",   // ← TRANSPARENT
+          backdropFilter: "none",       // ← keine Unschärfe, pure Transparenz
         }}
       >
         {/* LOGO */}
         <a
           href="/"
           style={{
-            color: "white",
+            color: "black",              // ← SCHWARZ
             textDecoration: "none",
             fontWeight: 700,
             letterSpacing: "0.08em",
@@ -45,13 +46,13 @@ export default function NavBar() {
             fontSize: "1rem",
           }}
         >
-          <a href="/works" style={{ color: "white", textDecoration: "none" }}>
+          <a href="/works" style={{ color: "black", textDecoration: "none" }}>
             Works
           </a>
-          <a href="/about" style={{ color: "white", textDecoration: "none" }}>
+          <a href="/about" style={{ color: "black", textDecoration: "none" }}>
             About
           </a>
-          <a href="/contact" style={{ color: "white", textDecoration: "none" }}>
+          <a href="/contact" style={{ color: "black", textDecoration: "none" }}>
             Contact
           </a>
         </nav>
@@ -79,7 +80,7 @@ export default function NavBar() {
             style={{
               width: "100%",
               height: "3px",
-              backgroundColor: "white",
+              backgroundColor: "black",  // ← SCHWARZ
               transition: "0.3s",
               transform: open ? "rotate(45deg) translate(5px, 6px)" : "none",
             }}
@@ -88,7 +89,7 @@ export default function NavBar() {
             style={{
               width: "100%",
               height: "3px",
-              backgroundColor: "white",
+              backgroundColor: "black",  // ← SCHWARZ
               opacity: open ? 0 : 1,
               transition: "0.3s",
             }}
@@ -97,7 +98,7 @@ export default function NavBar() {
             style={{
               width: "100%",
               height: "3px",
-              backgroundColor: "white",
+              backgroundColor: "black",  // ← SCHWARZ
               transition: "0.3s",
               transform: open ? "rotate(-45deg) translate(5px, -6px)" : "none",
             }}
@@ -105,14 +106,14 @@ export default function NavBar() {
         </button>
       </header>
 
-      {/* OVERLAY FULLSCREEN MENU */}
+      {/* FULLSCREEN OVERLAY MENU */}
       <div
         style={{
           position: "fixed",
           inset: 0,
           width: "100%",
           height: "100vh",
-          backgroundColor: "black",
+          backgroundColor: "black",   // bleibt schwarz
           display: open ? "flex" : "none",
           flexDirection: "column",
           justifyContent: "center",
