@@ -1,4 +1,4 @@
-import { works, getWorkFiles, type Work } from "../../data/works";
+import { works, getWorkFiles } from "../../data/works";
 
 export default async function WorkDetail({
   params,
@@ -20,7 +20,7 @@ export default async function WorkDetail({
 
   const files = getWorkFiles(slug);
 
-  // 🔹 Hintergrundbilder: erst werk-spezifisch, sonst Fallback
+  // Hintergrundbilder
   const bgMobile =
     work.backgroundMobile || "/works/curiouser-and-curiouser/bgmobil.png";
 
@@ -39,23 +39,42 @@ export default async function WorkDetail({
         boxSizing: "border-box",
       }}
     >
-      {/* Hintergrund per CSS, aber mit Werten aus TS */}
+      {/* Hintergrund + Overlay + Responsiveness */}
       <style>{`
-        .bg-detail {
-          position: absolute;
+        /* ----- Hintergrund: Mobile ----- */
+        .detail-bg {
+          position: fixed;
           inset: 0;
-          background-size: cover;
-          background-position: center;
           z-index: -2;
           background-image: url('${bgMobile}');
+          background-size: cover;
+          background-position: center top;
+          background-repeat: no-repeat;
+          opacity: 0.45;
         }
 
-        @media (min-width: 768px) {
-          .bg-detail {
+        /* ----- Hintergrund: Desktop ----- */
+        @media (min-width: 900px) {
+          .detail-bg {
             background-image: url('${bgDesktop}');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            opacity: 0.50;
           }
         }
 
+        /* Dunkler Overlay für Lesbarkeit */
+        .bg-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: -1;
+          backdrop-filter: blur(4px);
+          background: rgba(0, 0, 0, 0.30);
+        }
+
+        /* ----- CONTENT ----- */
         .content-wrapper {
           max-width: 650px;
           margin: 140px auto 80px;
@@ -71,7 +90,7 @@ export default async function WorkDetail({
 
         @media (min-width: 1000px) {
           .content-wrapper {
-            max-width: 550px;
+            max-width: 650px;
           }
           .media-item {
             max-width: 550px;
@@ -79,10 +98,12 @@ export default async function WorkDetail({
         }
       `}</style>
 
-      <div className="bg-detail" />
+      {/* Hintergrund + Overlay */}
+      <div className="detail-bg" />
+      <div className="bg-overlay" />
 
+      {/* Inhalt */}
       <div className="content-wrapper">
-        {/* Titel */}
         <h1
           style={{
             fontSize: "clamp(2rem, 6vw, 3rem)",
@@ -93,12 +114,10 @@ export default async function WorkDetail({
           {work.title}
         </h1>
 
-        {/* Jahr */}
         {work.year && (
           <p style={{ opacity: 0.7, marginBottom: "20px" }}>{work.year}</p>
         )}
 
-        {/* Beschreibung */}
         {work.description && (
           <p
             style={{
