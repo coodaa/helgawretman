@@ -1,4 +1,4 @@
-import { works, getWorkFiles } from "../../data/works";
+import { works, getWorkFiles, type Work } from "../../data/works";
 
 export default async function WorkDetail({
   params,
@@ -20,6 +20,7 @@ export default async function WorkDetail({
 
   const files = getWorkFiles(slug);
 
+  // 🔹 Hintergrundbilder: erst werk-spezifisch, sonst Fallback
   const bgMobile =
     work.backgroundMobile || "/works/curiouser-and-curiouser/bgmobil.png";
 
@@ -38,7 +39,7 @@ export default async function WorkDetail({
         boxSizing: "border-box",
       }}
     >
-      {/* Dynamic background */}
+      {/* Hintergrund per CSS, aber mit Werten aus TS */}
       <style>{`
         .bg-detail {
           position: absolute;
@@ -81,6 +82,7 @@ export default async function WorkDetail({
       <div className="bg-detail" />
 
       <div className="content-wrapper">
+        {/* Titel */}
         <h1
           style={{
             fontSize: "clamp(2rem, 6vw, 3rem)",
@@ -91,10 +93,12 @@ export default async function WorkDetail({
           {work.title}
         </h1>
 
+        {/* Jahr */}
         {work.year && (
           <p style={{ opacity: 0.7, marginBottom: "20px" }}>{work.year}</p>
         )}
 
+        {/* Beschreibung */}
         {work.description && (
           <p
             style={{
@@ -108,6 +112,7 @@ export default async function WorkDetail({
           </p>
         )}
 
+        {/* Bilder & Videos */}
         {files.map((file) =>
           /\.(mp4|mov|m4v)$/i.test(file) ? (
             <video key={file} src={file} controls className="media-item" />
