@@ -30,7 +30,7 @@ export default function NavBar() {
             textDecoration: "none",
             fontWeight: 700,
             letterSpacing: "0.08em",
-            fontSize: "1rem",
+            fontSize: "1.2rem",
           }}
         >
           HELGA WRETMAN
@@ -42,7 +42,7 @@ export default function NavBar() {
           style={{
             display: "none",
             gap: "24px",
-            fontSize: "1rem",
+            fontSize: "1.2rem",
           }}
         >
           <a href="/works" style={{ color: "white", textDecoration: "none" }}>
