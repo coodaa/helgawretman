@@ -1,82 +1,88 @@
 export default function Home() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* BACKGROUND VIDEO */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
+    <>
+      <main
         style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
+          minHeight: "100vh",
           width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          transform: "translate(-50%, -50%)",
-          zIndex: -2,
-        }}
-      >
-        {/* DESKTOP VERSION */}
-        <source
-          src="/neckturner_desktop_v2.mov"
-          type="video/mp4"            // wichtig! video/quicktime wird ignoriert
-          media="(min-width: 768px)"
-        />
-
-        {/* MOBILE VERSION */}
-        <source
-          src="/neckturnermobil_v2.mp4"
-          type="video/mp4"
-          media="(max-width: 767px)"
-        />
-
-        {/* FALLBACK (für alle Browser) */}
-        <source src="/neckturnermobil_v2.mp4" type="video/mp4" />
-      </video>
-
-      {/* HELLER OVERLAY FÜR SCHWARZEN TEXT */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: "rgba(255, 255, 255, 0.25)",
-          zIndex: -1,
-        }}
-      />
-
-      {/* TEXT / CONTENT */}
-      <div
-        style={{
-          textAlign: "center",
-          color: "white",
-          padding: "20px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           position: "relative",
-          zIndex: 2,
+          overflow: "hidden",
+          backgroundColor: "black",
         }}
       >
-        <h1
-          style={{
-            fontSize: "clamp(1.5rem, 7vw, 2.7rem)",
-            fontWeight: 700,
-            letterSpacing: "0.04em",
-            marginTop: "2.5em",
-          }}
-        >
-          Helga Wretman
-        </h1>
-      </div>
-    </main>
+        <video autoPlay muted loop playsInline className="video-mobile">
+          <source src="/neckturnermobil.mp4" type="video/mp4" />
+        </video>
+
+        <video autoPlay muted loop playsInline className="video-desktop">
+          <source src="/neckturnermobil.mp4" type="video/mp4" />
+        </video>
+
+        <div className="overlay" />
+
+        <div className="content">
+          <h1>Helga Wretman</h1>
+        </div>
+      </main>
+
+      <style>{`
+        main video {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: none;
+        }
+
+        .video-mobile {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        .video-desktop {
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(255, 255, 255, 0.25);
+          z-index: -1;
+        }
+
+        .content {
+          position: relative;
+          z-index: 10;
+          color: white;
+          text-align: center;
+          padding: 20px;
+        }
+
+        .content h1 {
+          font-size: clamp(1.5rem, 7vw, 2.7rem);
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          margin-top: 2.5em;
+        }
+
+        @media (max-width: 767px) {
+          .video-mobile {
+            display: block;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .video-desktop {
+            display: block;
+          }
+        }
+      `}</style>
+    </>
   );
 }
