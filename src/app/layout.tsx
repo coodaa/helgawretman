@@ -1,4 +1,5 @@
 import NavBar from "../components/NavBar";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
   title: "Helga Wretman",
@@ -77,7 +78,11 @@ export const metadata = {
   referrer: "origin-when-cross-origin",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <head>
@@ -119,6 +124,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <NavBar />
         {children}
+
+        {/* ✅ Vercel Speed Insights */}
+        <SpeedInsights />
       </body>
     </html>
   );
