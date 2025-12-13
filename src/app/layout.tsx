@@ -1,21 +1,47 @@
-import NavBar from "../components/NavBar";
+import type { Metadata } from "next";
+import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Inter } from "next/font/google";
 
-export const metadata = {
-  title: "Helga Wretman",
-  description: "Official Website — Helga Wretman",
+import NavBar from "../components/NavBar";
 
-  // OPEN GRAPH (PREVIEW FOR WHATSAPP / INSTAGRAM DM / MESSENGER)
+/* -------------------------------------
+   FONT
+-------------------------------------- */
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
+
+/* -------------------------------------
+   METADATA (SEO OPTIMIERT)
+-------------------------------------- */
+export const metadata: Metadata = {
+  metadataBase: new URL("https://helgawretman.com"),
+
+  title: {
+    default: "Helga Wretman — Berlin-based Artist & Performer",
+    template: "%s — Helga Wretman",
+  },
+
+  description:
+    "Helga Wretman is a Berlin-based artist working with video, performance and digital culture. Official website featuring selected works and projects.",
+
+  applicationName: "Helga Wretman",
+  category: "Art",
+
+  /* OPEN GRAPH */
   openGraph: {
-    title: "Helga Wretman",
-    description: "Official Website",
+    title: "Helga Wretman — Berlin-based Artist & Performer",
+    description:
+      "Official website of Helga Wretman, Berlin-based artist working with video, performance and digital culture.",
     url: "https://helgawretman.com",
     siteName: "Helga Wretman",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://helgawretman.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Helga Wretman",
@@ -23,25 +49,27 @@ export const metadata = {
     ],
   },
 
-  // TWITTER CARD
+  /* TWITTER */
   twitter: {
     card: "summary_large_image",
-    title: "Helga Wretman",
-    description: "Official Website",
+    title: "Helga Wretman — Berlin-based Artist & Performer",
+    description:
+      "Official website of Helga Wretman, Berlin-based artist working with video, performance and digital culture.",
+    site: "@helgawretman",
     creator: "@helgawretman",
-    images: ["/og-image.jpg"],
+    images: ["https://helgawretman.com/og-image.jpg"],
   },
 
-  // SEO
+  /* SEO KEYWORDS (nicht kritisch, aber okay) */
   keywords: [
     "Helga Wretman",
     "Berlin artist",
     "video art",
+    "performance art",
     "digital culture",
     "contemporary art",
     "body and technology",
-    "stunt artist",
-    "Fitness for Artists TV",
+    "artist portfolio",
   ],
 
   authors: [{ name: "Helga Wretman" }],
@@ -78,6 +106,9 @@ export const metadata = {
   referrer: "origin-when-cross-origin",
 };
 
+/* -------------------------------------
+   ROOT LAYOUT
+-------------------------------------- */
 export default function RootLayout({
   children,
 }: {
@@ -86,46 +117,80 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Preload Video */}
-        <link rel="preload" as="video" href="/helga-front-desktop.mp4" />
-
-        {/* STRUCTURED DATA */}
-        <script
+        {/* STRUCTURED DATA – PERSON */}
+        <Script
+          id="schema-person"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Helga Wretman",
-              url: "https://helgawretman.com",
-              image: "https://helgawretman.com/og-image.jpg",
-              sameAs: ["https://instagram.com/helgawretman"],
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Berlin",
-                addressCountry: "Germany",
-              },
-            }),
-          }}
-        />
+          strategy="afterInteractive"
+        >
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Helga Wretman",
+            url: "https://helgawretman.com",
+            image: "https://helgawretman.com/og-image.jpg",
+            jobTitle: "Artist",
+            description:
+              "Berlin-based artist working with video, performance and digital culture.",
+            knowsAbout: [
+              "Video Art",
+              "Performance Art",
+              "Digital Culture",
+              "Body and Technology",
+            ],
+            sameAs: ["https://instagram.com/helgawretman"],
+            homeLocation: {
+              "@type": "Place",
+              name: "Berlin, Germany",
+            },
+          })}
+        </Script>
+
+        {/* STRUCTURED DATA – WEBSITE */}
+        <Script
+          id="schema-website"
+          type="application/ld+json"
+          strategy="afterInteractive"
+        >
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Helga Wretman",
+            url: "https://helgawretman.com",
+            inLanguage: "en",
+          })}
+        </Script>
       </head>
 
       <body
+        className={inter.className}
         style={{
           margin: 0,
           padding: 0,
           backgroundColor: "white",
           color: "white",
-          fontFamily: "Arial, Helvetica, sans-serif",
           WebkitFontSmoothing: "antialiased",
           MozOsxFontSmoothing: "grayscale",
           overflowX: "hidden",
         }}
       >
-        <NavBar />
-        {children}
+        {/* Accessibility */}
+        <a
+          href="#content"
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            top: "auto",
+          }}
+        >
+          Skip to content
+        </a>
 
-        {/* ✅ Vercel Speed Insights */}
+        <NavBar />
+
+        <main id="content">{children}</main>
+
+        {/* Performance Monitoring */}
         <SpeedInsights />
       </body>
     </html>
