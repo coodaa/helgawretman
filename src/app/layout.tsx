@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
 
@@ -83,8 +84,8 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
-      "max-snippet": "-1",
-      "max-video-preview": "-1",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
 
@@ -189,6 +190,9 @@ export default function RootLayout({
         <NavBar />
 
         <main id="content">{children}</main>
+
+        {/* Analytics */}
+        <Analytics />
 
         {/* Performance Monitoring */}
         <SpeedInsights />
