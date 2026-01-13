@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
@@ -12,6 +12,16 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
+
+/* -------------------------------------
+   VIEWPORT (wichtig für Lighthouse/Google)
+-------------------------------------- */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#000000",
+};
 
 /* -------------------------------------
    METADATA (SEO OPTIMIERT)
@@ -29,6 +39,18 @@ export const metadata: Metadata = {
 
   applicationName: "Helga Wretman",
   category: "Art",
+
+  /* Google Search Console (hier Code eintragen) */
+  verification: {
+    google: "PASTE_YOUR_GOOGLE_VERIFICATION_CODE_HERE",
+  },
+
+  /* verhindert iOS Auto-Linking (Telefon/Mail) – oft sauberer für Portfolio-Seiten */
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
 
   /* OPEN GRAPH */
   openGraph: {
@@ -60,7 +82,6 @@ export const metadata: Metadata = {
     images: ["https://helgawretman.com/og-image.jpg"],
   },
 
-  /* SEO KEYWORDS (nicht kritisch, aber okay) */
   keywords: [
     "Helga Wretman",
     "Berlin artist",
@@ -76,17 +97,17 @@ export const metadata: Metadata = {
   creator: "Helga Wretman",
   publisher: "Helga Wretman",
 
-  robots: {
+ robots: {
+  index: true,
+  follow: true,
+  googleBot: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": "-1",
-      "max-video-preview": "-1",
-    },
+    "max-image-preview": "large",
+    "max-snippet": -1,
+    "max-video-preview": -1,
   },
+},
 
   alternates: {
     canonical: "https://helgawretman.com",
@@ -117,6 +138,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Optional, aber oft hilfreich: Sitemap-Hinweis */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+        {/* Optional: “me”-Link (kann Identity/Profiles sauber verknüpfen) */}
+        <link rel="me" href="https://instagram.com/helgawretman" />
+
         {/* STRUCTURED DATA – PERSON */}
         <Script
           id="schema-person"
@@ -126,6 +153,7 @@ export default function RootLayout({
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Person",
+            "@id": "https://helgawretman.com/#person",
             name: "Helga Wretman",
             url: "https://helgawretman.com",
             image: "https://helgawretman.com/og-image.jpg",
@@ -155,9 +183,19 @@ export default function RootLayout({
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
+            "@id": "https://helgawretman.com/#website",
             name: "Helga Wretman",
             url: "https://helgawretman.com",
             inLanguage: "en",
+            publisher: {
+              "@id": "https://helgawretman.com/#person",
+            },
+            // Optional: falls du später eine Suche auf der Seite hast
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://helgawretman.com/search?q={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
           })}
         </Script>
       </head>
