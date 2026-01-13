@@ -20,7 +20,6 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#000000",
 };
 
 /* -------------------------------------
@@ -123,7 +122,6 @@ export const metadata: Metadata = {
   },
 
   manifest: "/site.webmanifest",
-  themeColor: "#000000",
   referrer: "origin-when-cross-origin",
 };
 

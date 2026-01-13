@@ -4,7 +4,7 @@ import { works } from "./data/works"; // Pfad ggf. anpassen
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://helgawretman.com";
 
-  const staticPages = [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/`,
       changeFrequency: "monthly",
@@ -27,18 +27,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const workPages = works.map((work) => {
+  const workPages: MetadataRoute.Sitemap = works.map((work) => {
     const hasValidYear =
-      typeof work.year === "string" &&
-      /^\d{4}$/.test(work.year);
+      typeof work.year === "string" && /^\d{4}$/.test(work.year);
 
     return {
       url: `${baseUrl}/works/${work.slug}`,
-      changeFrequency: "yearly" as const,
+      changeFrequency: "yearly",
       priority: 0.8,
-      ...(hasValidYear
-        ? { lastModified: new Date(`${work.year}-01-01`) }
-        : {}),
+      ...(hasValidYear ? { lastModified: new Date(`${work.year}-01-01`) } : {}),
     };
   });
 
