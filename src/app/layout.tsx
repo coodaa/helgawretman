@@ -1,12 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import { Inter } from "next/font/google";
 
 import NavBar from "../components/NavBar";
-import { Analytics } from "@vercel/analytics/react";
-
-<Analytics />
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -181,6 +179,7 @@ export default function RootLayout({
         <NavBar />
         <main id="content">{children}</main>
 
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
