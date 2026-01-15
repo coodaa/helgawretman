@@ -4,27 +4,19 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
 
 import NavBar from "../components/NavBar";
+import { Analytics } from "@vercel/analytics/react";
 
-/* -------------------------------------
-   FONT
--------------------------------------- */
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-});
+<Analytics />
 
-/* -------------------------------------
-   VIEWPORT (wichtig für Lighthouse/Google)
--------------------------------------- */
+const inter = Inter({ subsets: ["latin"], display: "swap" });
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: "#000000",
 };
 
-/* -------------------------------------
-   METADATA (SEO OPTIMIERT)
--------------------------------------- */
 export const metadata: Metadata = {
   metadataBase: new URL("https://helgawretman.com"),
 
@@ -36,22 +28,45 @@ export const metadata: Metadata = {
   description:
     "Helga Wretman is a Berlin-based artist working with video, performance and digital culture. Official website featuring selected works and projects.",
 
+  alternates: { canonical: "/" },
+
+  // optional, okay to have
   applicationName: "Helga Wretman",
   category: "Art",
+  authors: [{ name: "Helga Wretman" }],
+  creator: "Helga Wretman",
+  publisher: "Helga Wretman",
 
-  /* Google Search Console (hier Code eintragen) */
-  verification: {
-    google: "PASTE_YOUR_GOOGLE_VERIFICATION_CODE_HERE",
-  },
-
-  /* verhindert iOS Auto-Linking (Telefon/Mail) – oft sauberer für Portfolio-Seiten */
   formatDetection: {
     telephone: false,
     email: false,
     address: false,
   },
 
-  /* OPEN GRAPH */
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
+  // Keywords sind optional (Google nutzt sie praktisch nicht),
+  // schaden aber nicht, wenn sie seriös sind:
+  keywords: [
+    "Helga Wretman",
+    "Berlin artist",
+    "video art",
+    "performance art",
+    "digital culture",
+    "contemporary art",
+    "artist portfolio",
+  ],
+
   openGraph: {
     title: "Helga Wretman — Berlin-based Artist & Performer",
     description:
@@ -70,53 +85,19 @@ export const metadata: Metadata = {
     ],
   },
 
-  /* TWITTER */
   twitter: {
     card: "summary_large_image",
     title: "Helga Wretman — Berlin-based Artist & Performer",
     description:
       "Official website of Helga Wretman, Berlin-based artist working with video, performance and digital culture.",
-    site: "@helgawretman",
-    creator: "@helgawretman",
     images: ["https://helgawretman.com/og-image.jpg"],
-  },
-
-  keywords: [
-    "Helga Wretman",
-    "Berlin artist",
-    "video art",
-    "performance art",
-    "digital culture",
-    "contemporary art",
-    "body and technology",
-    "artist portfolio",
-  ],
-
-  authors: [{ name: "Helga Wretman" }],
-  creator: "Helga Wretman",
-  publisher: "Helga Wretman",
-
- robots: {
-  index: true,
-  follow: true,
-  googleBot: {
-    index: true,
-    follow: true,
-    "max-image-preview": "large",
-    "max-snippet": -1,
-    "max-video-preview": -1,
-  },
-},
-
-  alternates: {
-  canonical: "/",
   },
 
   icons: {
     icon: [
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
@@ -125,9 +106,6 @@ export const metadata: Metadata = {
   referrer: "origin-when-cross-origin",
 };
 
-/* -------------------------------------
-   ROOT LAYOUT
--------------------------------------- */
 export default function RootLayout({
   children,
 }: {
@@ -136,13 +114,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Optional, aber oft hilfreich: Sitemap-Hinweis */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-        {/* Optional: “me”-Link (kann Identity/Profiles sauber verknüpfen) */}
-        <link rel="me" href="https://instagram.com/helgawretman" />
-
-        {/* STRUCTURED DATA – PERSON */}
         <Script
           id="schema-person"
           type="application/ld+json"
@@ -155,7 +128,7 @@ export default function RootLayout({
             name: "Helga Wretman",
             url: "https://helgawretman.com",
             image: "https://helgawretman.com/og-image.jpg",
-            jobTitle: "Artist",
+            jobTitle: "Artist & Performer",
             description:
               "Berlin-based artist working with video, performance and digital culture.",
             knowsAbout: [
@@ -164,15 +137,17 @@ export default function RootLayout({
               "Digital Culture",
               "Body and Technology",
             ],
-            sameAs: ["https://instagram.com/helgawretman"],
-            homeLocation: {
-              "@type": "Place",
-              name: "Berlin, Germany",
-            },
+            sameAs: [
+              "https://helgawretman.com",
+              "https://www.instagram.com/helgawretman",
+              "https://www.facebook.com/helga.wretman",
+              "https://www.imdb.com/name/nm3218091/",
+              "https://methodsofart.net/artist/helga-wretman/",
+            ],
+            homeLocation: { "@type": "Place", name: "Berlin, Germany" },
           })}
         </Script>
 
-        {/* STRUCTURED DATA – WEBSITE */}
         <Script
           id="schema-website"
           type="application/ld+json"
@@ -184,16 +159,7 @@ export default function RootLayout({
             "@id": "https://helgawretman.com/#website",
             name: "Helga Wretman",
             url: "https://helgawretman.com",
-            inLanguage: "en",
-            publisher: {
-              "@id": "https://helgawretman.com/#person",
-            },
-            // Optional: falls du später eine Suche auf der Seite hast
-            potentialAction: {
-              "@type": "SearchAction",
-              target: "https://helgawretman.com/search?q={search_term_string}",
-              "query-input": "required name=search_term_string",
-            },
+            publisher: { "@id": "https://helgawretman.com/#person" },
           })}
         </Script>
       </head>
@@ -205,28 +171,16 @@ export default function RootLayout({
           padding: 0,
           backgroundColor: "white",
           color: "white",
-          WebkitFontSmoothing: "antialiased",
-          MozOsxFontSmoothing: "grayscale",
           overflowX: "hidden",
         }}
       >
-        {/* Accessibility */}
-        <a
-          href="#content"
-          style={{
-            position: "absolute",
-            left: "-9999px",
-            top: "auto",
-          }}
-        >
+        <a href="#content" style={{ position: "absolute", left: "-9999px" }}>
           Skip to content
         </a>
 
         <NavBar />
-
         <main id="content">{children}</main>
 
-        {/* Performance Monitoring */}
         <SpeedInsights />
       </body>
     </html>
