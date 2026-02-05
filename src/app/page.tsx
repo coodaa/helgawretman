@@ -52,35 +52,33 @@ export default function Home() {
         .overlay {
           position: absolute;
           inset: 0;
-          background: rgba(255, 255, 255, 0.25);
-          z-index: -1;
+          background: rgba(255,255,255,0.2);
         }
 
         .content {
           position: relative;
           z-index: 10;
-          color: white;
           text-align: center;
           padding: 20px;
         }
 
         .content h1 {
           font-size: clamp(1.5rem, 7vw, 2.7rem);
-          font-weight: 700;
           letter-spacing: 0.04em;
           margin-top: 2.5em;
         }
 
+        .content p {
+          margin-top: 1em;
+          opacity: 0.85;
+        }
+
         @media (max-width: 767px) {
-          .video-mobile {
-            display: block;
-          }
+          .video-mobile { display: block; }
         }
 
         @media (min-width: 768px) {
-          .video-desktop {
-            display: block;
-          }
+          .video-desktop { display: block; }
         }
       `}</style>
     </>

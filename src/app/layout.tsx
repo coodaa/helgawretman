@@ -3,7 +3,6 @@ import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { Inter } from "next/font/google";
-
 import NavBar from "../components/NavBar";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
@@ -28,33 +27,17 @@ export const metadata: Metadata = {
 
   alternates: { canonical: "/" },
 
-  // optional, okay to have
   applicationName: "Helga Wretman",
   category: "Art",
   authors: [{ name: "Helga Wretman" }],
   creator: "Helga Wretman",
   publisher: "Helga Wretman",
 
-  formatDetection: {
-    telephone: false,
-    email: false,
-    address: false,
-  },
-
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
   },
 
-  // Keywords sind optional (Google nutzt sie praktisch nicht),
-  // schaden aber nicht, wenn sie seriös sind:
   keywords: [
     "Helga Wretman",
     "Berlin artist",
@@ -62,7 +45,6 @@ export const metadata: Metadata = {
     "performance art",
     "digital culture",
     "contemporary art",
-    "artist portfolio",
   ],
 
   openGraph: {
@@ -75,7 +57,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://helgawretman.com/og-image.jpg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Helga Wretman",
@@ -88,20 +70,19 @@ export const metadata: Metadata = {
     title: "Helga Wretman — Berlin-based Artist & Performer",
     description:
       "Official website of Helga Wretman, Berlin-based artist working with video, performance and digital culture.",
-    images: ["https://helgawretman.com/og-image.jpg"],
+    images: ["/og-image.jpg"],
   },
 
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-192x192.png", sizes: "192x192", type: "image/png" },
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
 
   manifest: "/site.webmanifest",
-  referrer: "origin-when-cross-origin",
 };
 
 export default function RootLayout({
@@ -114,11 +95,8 @@ export default function RootLayout({
       <head>
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-        <Script
-          id="schema-person"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
+        {/* Person Schema */}
+        <Script id="schema-person" type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Person",
@@ -126,9 +104,12 @@ export default function RootLayout({
             name: "Helga Wretman",
             url: "https://helgawretman.com",
             image: "https://helgawretman.com/og-image.jpg",
-            jobTitle: "Artist & Performer",
             description:
               "Berlin-based artist working with video, performance and digital culture.",
+            hasOccupation: [
+              { "@type": "Occupation", name: "Artist" },
+              { "@type": "Occupation", name: "Performer" },
+            ],
             knowsAbout: [
               "Video Art",
               "Performance Art",
@@ -136,21 +117,15 @@ export default function RootLayout({
               "Body and Technology",
             ],
             sameAs: [
-              "https://helgawretman.com",
               "https://www.instagram.com/helgawretman",
               "https://www.facebook.com/helga.wretman",
-              "https://www.imdb.com/name/nm3218091/",
-              "https://methodsofart.net/artist/helga-wretman/",
             ],
             homeLocation: { "@type": "Place", name: "Berlin, Germany" },
           })}
         </Script>
 
-        <Script
-          id="schema-website"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
+        {/* Website Schema */}
+        <Script id="schema-website" type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
@@ -167,16 +142,13 @@ export default function RootLayout({
         style={{
           margin: 0,
           padding: 0,
-          backgroundColor: "white",
+          backgroundColor: "black",
           color: "white",
           overflowX: "hidden",
         }}
       >
-        <a href="#content" style={{ position: "absolute", left: "-9999px" }}>
-          Skip to content
-        </a>
-
         <NavBar />
+
         <main id="content">{children}</main>
 
         <Analytics />
