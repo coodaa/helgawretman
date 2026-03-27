@@ -1,4 +1,21 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { works, getWorkFiles } from "../data/works";
+
+export const metadata: Metadata = {
+  title: "Works",
+  description:
+    "Selected works by Helga Wretman — video art, performance, and installation projects.",
+  alternates: { canonical: "/works" },
+  openGraph: {
+    title: "Works — Helga Wretman",
+    description:
+      "Selected works by Helga Wretman — video art, performance, and installation projects.",
+    url: "https://helgawretman.com/works",
+    type: "website",
+  },
+};
 
 export default function WorksPage() {
   return (
@@ -85,6 +102,7 @@ export default function WorksPage() {
             border: 1px solid rgba(255,255,255,0.15);
             overflow: hidden;
             width: 100%;
+            position: relative;
             transition: transform 0.25s ease;
           }
 
@@ -93,8 +111,6 @@ export default function WorksPage() {
           }
 
           .square img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
           }
@@ -117,9 +133,9 @@ export default function WorksPage() {
           // External project (Stolen Goods)
           if (work.isExternal) {
             return (
-              <a key={work.slug} href={work.externalUrl} target="_blank" style={{ color: "white", textDecoration: "none" }}>
+              <a key={work.slug} href={work.externalUrl} target="_blank" rel="noopener noreferrer" style={{ color: "white", textDecoration: "none" }}>
                 <div className="square">
-                  <img src={thumbnail} alt={work.title} />
+                  {thumbnail && <Image src={thumbnail} alt={work.title} fill sizes="(min-width: 1300px) 20vw, (min-width: 900px) 25vw, (min-width: 600px) 33vw, 50vw" />}
                 </div>
                 <p className="title">{work.title}</p>
               </a>
@@ -129,9 +145,9 @@ export default function WorksPage() {
           // PDF Project
           if (work.isPdf) {
             return (
-              <a key={work.slug} href={work.pdfPath} target="_blank" style={{ color: "white", textDecoration: "none" }}>
+              <a key={work.slug} href={work.pdfPath} target="_blank" rel="noopener noreferrer" style={{ color: "white", textDecoration: "none" }}>
                 <div className="square">
-                  <img src={thumbnail} alt={work.title} />
+                  {thumbnail && <Image src={thumbnail} alt={work.title} fill sizes="(min-width: 1300px) 20vw, (min-width: 900px) 25vw, (min-width: 600px) 33vw, 50vw" />}
                 </div>
                 <p className="title">{work.title}</p>
               </a>
@@ -140,12 +156,12 @@ export default function WorksPage() {
 
           // Normal project
           return (
-            <a key={work.slug} href={`/works/${work.slug}`} style={{ color: "white", textDecoration: "none" }}>
+            <Link key={work.slug} href={`/works/${work.slug}`} style={{ color: "white", textDecoration: "none" }}>
               <div className="square">
-                <img src={thumbnail} alt={work.title} />
+                {thumbnail && <Image src={thumbnail} alt={work.title} fill sizes="(min-width: 1300px) 20vw, (min-width: 900px) 25vw, (min-width: 600px) 33vw, 50vw" />}
               </div>
               <p className="title">{work.title}</p>
-            </a>
+            </Link>
           );
         })}
       </div>

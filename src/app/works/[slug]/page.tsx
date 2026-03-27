@@ -1,4 +1,38 @@
+import Image from "next/image";
 import { works, getWorkFiles } from "../../data/works";
+import type { Metadata } from "next";
+
+export function generateStaticParams() {
+  return works
+    .filter((w) => !w.isExternal && !w.isPdf)
+    .map((w) => ({ slug: w.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const work = works.find((w) => w.slug === slug);
+  if (!work) return {};
+
+  return {
+    title: work.title,
+    description: work.description
+      ? work.description.slice(0, 160)
+      : `${work.title} — a work by Helga Wretman.`,
+    alternates: { canonical: `/works/${slug}` },
+    openGraph: {
+      title: work.title,
+      description: work.description
+        ? work.description.slice(0, 160)
+        : `${work.title} — a work by Helga Wretman.`,
+      url: `https://helgawretman.com/works/${slug}`,
+      type: "article",
+    },
+  };
+}
 
 export default async function WorkDetail({
   params,
@@ -136,7 +170,7 @@ export default async function WorkDetail({
           /\.(mp4|mov|m4v)$/i.test(file) ? (
             <video key={file} src={file} controls className="media-item" />
           ) : (
-            <img key={file} src={file} className="media-item" />
+            <Image key={file} src={file} alt={work.title} width={0} height={0} sizes="(min-width: 1000px) 550px, 650px" className="media-item" style={{ width: "100%", height: "auto" }} />
           )
         )}
       </div>

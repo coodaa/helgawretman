@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
@@ -23,7 +24,7 @@ export default function NavBar() {
         }}
       >
         {/* LOGO */}
-        <a
+        <Link
           href="/"
           style={{
             color: "white",
@@ -34,7 +35,7 @@ export default function NavBar() {
           }}
         >
           HELGA WRETMAN
-        </a>
+        </Link>
 
         {/* DESKTOP MENU */}
         <nav
@@ -45,15 +46,15 @@ export default function NavBar() {
             fontSize: "1.2rem",
           }}
         >
-          <a href="/works" style={{ color: "white", textDecoration: "none" }}>
+          <Link href="/works" style={{ color: "white", textDecoration: "none" }}>
             Works
-          </a>
-          <a href="/about" style={{ color: "white", textDecoration: "none" }}>
+          </Link>
+          <Link href="/about" style={{ color: "white", textDecoration: "none" }}>
             About
-          </a>
-          <a href="/contact" style={{ color: "white", textDecoration: "none" }}>
+          </Link>
+          <Link href="/contact" style={{ color: "white", textDecoration: "none" }}>
             Contact
-          </a>
+          </Link>
         </nav>
 
         {/* BURGER BUTTON (nur mobil) */}
@@ -126,6 +127,7 @@ export default function NavBar() {
           muted
           loop
           playsInline
+          preload="none"
           style={{
             position: "absolute",
             top: "50%",
@@ -138,7 +140,7 @@ export default function NavBar() {
             display: "block",
           }}
         >
-          <source src="/neckturnermobil_v2.mp4" type="video/mp4" />
+          <source src="/neckturnermobil.mp4" type="video/mp4" />
         </video>
 
         {/* Weißer Overlay damit Text lesbar bleibt */}
@@ -152,7 +154,7 @@ export default function NavBar() {
         />
 
         {/* MENU LINKS */}
-        <a
+        <Link
           href="/works"
           onClick={() => setOpen(false)}
           style={{
@@ -163,8 +165,8 @@ export default function NavBar() {
           }}
         >
           Works
-        </a>
-        <a
+        </Link>
+        <Link
           href="/about"
           onClick={() => setOpen(false)}
           style={{
@@ -175,8 +177,8 @@ export default function NavBar() {
           }}
         >
           About
-        </a>
-        <a
+        </Link>
+        <Link
           href="/contact"
           onClick={() => setOpen(false)}
           style={{
@@ -187,7 +189,7 @@ export default function NavBar() {
           }}
         >
           Contact
-        </a>
+        </Link>
       </div>
 
       {/* RESPONSIVE CSS */}

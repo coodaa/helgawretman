@@ -1,3 +1,19 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Helga Wretman — Berlin-based artist, performer and stunt woman. Born in Stockholm, works in video art, performance and digital culture.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About — Helga Wretman",
+    description:
+      "Helga Wretman — Berlin-based artist, performer and stunt woman. Born in Stockholm, works in video art, performance and digital culture.",
+    url: "https://helgawretman.com/about",
+    type: "profile",
+  },
+};
+
 export default function About() {
   return (
     <main

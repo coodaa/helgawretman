@@ -86,5 +86,10 @@ export function getWorkFiles(slug: string) {
     .filter((file) =>
       /\.(jpg|jpeg|png|webp|gif|mp4|mov|m4v)$/i.test(file)
     )
+    .sort((a, b) => {
+      const numA = parseInt(a.match(/\d+/)?.[0] ?? "0", 10);
+      const numB = parseInt(b.match(/\d+/)?.[0] ?? "0", 10);
+      return numA - numB || a.localeCompare(b);
+    })
     .map((file) => `/works/${slug}/${file}`);
 }

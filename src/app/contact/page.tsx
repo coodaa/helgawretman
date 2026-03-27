@@ -1,3 +1,19 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Get in touch with Helga Wretman — email and Instagram contact for bookings and inquiries.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact — Helga Wretman",
+    description:
+      "Get in touch with Helga Wretman — email and Instagram contact for bookings and inquiries.",
+    url: "https://helgawretman.com/contact",
+    type: "website",
+  },
+};
+
 export default function Contact() {
   return (
     <main
@@ -14,12 +30,14 @@ export default function Contact() {
         overflow: "hidden",
       }}
     >
-      {/* BACKGROUND VIDEO */}
+      {/* BACKGROUND VIDEO — mobile */}
       <video
         autoPlay
         muted
         loop
         playsInline
+        preload="none"
+        className="contact-video-mobile"
         style={{
           position: "absolute",
           top: "50%",
@@ -29,25 +47,44 @@ export default function Contact() {
           objectFit: "cover",
           transform: "translate(-50%, -50%)",
           zIndex: -2,
+          display: "none",
         }}
       >
-        {/* Desktop */}
-        <source
-          src="/contact-desktop.mp4"
-          type="video/mp4"
-          media="(min-width: 768px)"
-        />
-
-        {/* Mobile */}
-        <source
-          src="/contact-mobil.MOV"
-          type="video/mp4"
-          media="(max-width: 767px)"
-        />
-
-        {/* Fallback */}
+        <source src="/contact-mobil.MOV" type="video/mp4" />
         <source src="/contact-desktop.mp4" type="video/mp4" />
       </video>
+
+      {/* BACKGROUND VIDEO — desktop */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="contact-video-desktop"
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transform: "translate(-50%, -50%)",
+          zIndex: -2,
+          display: "none",
+        }}
+      >
+        <source src="/contact-desktop.mp4" type="video/mp4" />
+      </video>
+
+      <style>{`
+        @media (max-width: 767px) {
+          .contact-video-mobile { display: block !important; }
+        }
+        @media (min-width: 768px) {
+          .contact-video-desktop { display: block !important; }
+        }
+      `}</style>
 
       {/* DARK OVERLAY */}
       {/* <div
@@ -108,6 +145,7 @@ export default function Contact() {
           <a
             href="https://instagram.com/helgawretman"
             target="_blank"
+            rel="noopener noreferrer"
             style={{
               color: "white",
               textDecoration: "none",
