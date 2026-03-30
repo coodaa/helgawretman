@@ -13,11 +13,11 @@ export default function Home() {
           backgroundColor: "black",
         }}
       >
-        <video autoPlay muted loop playsInline preload="none" className="video-mobile">
+        <video autoPlay muted loop playsInline preload="metadata" className="video-mobile">
           <source src="/neckturnermobil.mp4" type="video/mp4" />
         </video>
 
-        <video autoPlay muted loop playsInline preload="none" className="video-desktop">
+        <video autoPlay muted loop playsInline preload="metadata" className="video-desktop">
           <source src="/neckturner_desktop.mp4" type="video/mp4" />
         </video>
 

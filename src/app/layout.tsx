@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { Inter } from "next/font/google";
@@ -91,48 +90,49 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-
-        {/* Person Schema */}
-        <Script id="schema-person" type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "@id": "https://helgawretman.com/#person",
-            name: "Helga Wretman",
-            url: "https://helgawretman.com",
-            image: "https://helgawretman.com/og-image.jpg",
-            description:
-              "Berlin-based artist working with video, performance and digital culture.",
-            hasOccupation: [
-              { "@type": "Occupation", name: "Artist" },
-              { "@type": "Occupation", name: "Performer" },
-            ],
-            knowsAbout: [
-              "Video Art",
-              "Performance Art",
-              "Digital Culture",
-              "Body and Technology",
-            ],
-            sameAs: [
-              "https://www.instagram.com/helgawretman",
-              "https://www.facebook.com/helga.wretman",
-            ],
-            homeLocation: { "@type": "Place", name: "Berlin, Germany" },
-          })}
-        </Script>
-
-        {/* Website Schema */}
-        <Script id="schema-website" type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "@id": "https://helgawretman.com/#website",
-            name: "Helga Wretman",
-            url: "https://helgawretman.com",
-            publisher: { "@id": "https://helgawretman.com/#person" },
-          })}
-        </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "@id": "https://helgawretman.com/#person",
+              name: "Helga Wretman",
+              url: "https://helgawretman.com",
+              image: "https://helgawretman.com/og-image.jpg",
+              description:
+                "Berlin-based artist working with video, performance and digital culture.",
+              hasOccupation: [
+                { "@type": "Occupation", name: "Artist" },
+                { "@type": "Occupation", name: "Performer" },
+              ],
+              knowsAbout: [
+                "Video Art",
+                "Performance Art",
+                "Digital Culture",
+                "Body and Technology",
+              ],
+              sameAs: [
+                "https://www.instagram.com/helgawretman",
+                "https://www.facebook.com/helga.wretman",
+              ],
+              homeLocation: { "@type": "Place", name: "Berlin, Germany" },
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "@id": "https://helgawretman.com/#website",
+              name: "Helga Wretman",
+              url: "https://helgawretman.com",
+              publisher: { "@id": "https://helgawretman.com/#person" },
+            }),
+          }}
+        />
       </head>
 
       <body

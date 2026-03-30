@@ -83,8 +83,10 @@ export function getWorkFiles(slug: string) {
   const files = fs.readdirSync(folder);
 
   return files
-    .filter((file) =>
-      /\.(jpg|jpeg|png|webp|gif|mp4|mov|m4v)$/i.test(file)
+    .filter(
+      (file) =>
+        /\.(jpg|jpeg|png|webp|gif|mp4|mov|m4v)$/i.test(file) &&
+        !/^bg/i.test(file)
     )
     .sort((a, b) => {
       const numA = parseInt(a.match(/\d+/)?.[0] ?? "0", 10);

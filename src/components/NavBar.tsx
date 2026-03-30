@@ -1,9 +1,53 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const burgerRef = useRef<HTMLButtonElement>(null);
+
+  // Focus trap + Escape key when mobile menu is open
+  useEffect(() => {
+    if (!open) return;
+
+    // Move focus into menu on open
+    const firstFocusable = menuRef.current?.querySelector<HTMLElement>(
+      "a[href], button"
+    );
+    firstFocusable?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        burgerRef.current?.focus();
+        return;
+      }
+
+      if (e.key !== "Tab") return;
+
+      const focusable = Array.from(
+        menuRef.current?.querySelectorAll<HTMLElement>(
+          "a[href], button, [tabindex]:not([tabindex='-1'])"
+        ) ?? []
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
 
   return (
     <>
@@ -40,6 +84,7 @@ export default function NavBar() {
         {/* DESKTOP MENU */}
         <nav
           className="desktop-menu"
+          aria-label="Main navigation"
           style={{
             display: "none",
             gap: "24px",
@@ -59,9 +104,11 @@ export default function NavBar() {
 
         {/* BURGER BUTTON (nur mobil) */}
         <button
+          ref={burgerRef}
           onClick={() => setOpen(!open)}
-          aria-label="Menu"
+          aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open ? "true" : "false"}
+          aria-controls="mobile-menu"
           className="burger"
           style={{
             width: "28px",
@@ -81,7 +128,7 @@ export default function NavBar() {
             style={{
               width: "100%",
               height: "3px",
-              backgroundColor:"white",
+              backgroundColor: "white",
               transition: "0.3s",
               transform: open ? "rotate(45deg) translate(5px, 6px)" : "none",
             }}
@@ -109,6 +156,11 @@ export default function NavBar() {
 
       {/* FULLSCREEN MOBILE MENU */}
       <div
+        id="mobile-menu"
+        ref={menuRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation"
         style={{
           position: "fixed",
           inset: 0,
@@ -122,13 +174,14 @@ export default function NavBar() {
           zIndex: 900,
         }}
       >
-        {/* BACKGROUND VIDEO nur mobil */}
+        {/* BACKGROUND VIDEO */}
         <video
           autoPlay
           muted
           loop
           playsInline
           preload="none"
+          aria-hidden="true"
           style={{
             position: "absolute",
             top: "50%",
@@ -144,8 +197,9 @@ export default function NavBar() {
           <source src="/neckturnermobil.mp4" type="video/mp4" />
         </video>
 
-        {/* Weißer Overlay damit Text lesbar bleibt */}
+        {/* Overlay */}
         <div
+          aria-hidden="true"
           style={{
             position: "absolute",
             inset: 0,
@@ -155,42 +209,52 @@ export default function NavBar() {
         />
 
         {/* MENU LINKS */}
-        <Link
-          href="/works"
-          onClick={() => setOpen(false)}
-          style={{
-            color: "white",
-            fontSize: "2rem",
-            textDecoration: "none",
-            fontWeight: 500,
-          }}
-        >
-          Works
-        </Link>
-        <Link
-          href="/about"
-          onClick={() => setOpen(false)}
-          style={{
-            color: "white",
-            fontSize: "2rem",
-            textDecoration: "none",
-            fontWeight: 500,
-          }}
-        >
-          About
-        </Link>
-        <Link
-          href="/contact"
-          onClick={() => setOpen(false)}
-          style={{
-            color: "white",
-            fontSize: "2rem",
-            textDecoration: "none",
-            fontWeight: 500,
-          }}
-        >
-          Contact
-        </Link>
+        <nav aria-label="Mobile navigation">
+          <Link
+            href="/works"
+            onClick={() => setOpen(false)}
+            style={{
+              display: "block",
+              color: "white",
+              fontSize: "2rem",
+              textDecoration: "none",
+              fontWeight: 500,
+              marginBottom: "32px",
+              textAlign: "center",
+            }}
+          >
+            Works
+          </Link>
+          <Link
+            href="/about"
+            onClick={() => setOpen(false)}
+            style={{
+              display: "block",
+              color: "white",
+              fontSize: "2rem",
+              textDecoration: "none",
+              fontWeight: 500,
+              marginBottom: "32px",
+              textAlign: "center",
+            }}
+          >
+            About
+          </Link>
+          <Link
+            href="/contact"
+            onClick={() => setOpen(false)}
+            style={{
+              display: "block",
+              color: "white",
+              fontSize: "2rem",
+              textDecoration: "none",
+              fontWeight: 500,
+              textAlign: "center",
+            }}
+          >
+            Contact
+          </Link>
+        </nav>
       </div>
 
       {/* RESPONSIVE CSS */}

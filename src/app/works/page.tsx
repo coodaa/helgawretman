@@ -72,10 +72,14 @@ export default function WorksPage() {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
             justify-content: center;
-            justify-items: center;
             gap: 60px;
             max-width: 1200px;
             margin: 0 auto;
+          }
+
+          .work-link {
+            display: block;
+            width: 100%;
           }
 
           @media (min-width: 600px) {
@@ -124,16 +128,14 @@ export default function WorksPage() {
         `}</style>
 
         {works.map((work) => {
-          const files = work.isPdf
-            ? getWorkFiles("older-works")
-            : getWorkFiles(work.slug);
+          const files = getWorkFiles(work.slug);
 
           const thumbnail = files[0];
 
           // External project (Stolen Goods)
           if (work.isExternal) {
             return (
-              <a key={work.slug} href={work.externalUrl} target="_blank" rel="noopener noreferrer" style={{ color: "white", textDecoration: "none" }}>
+              <a key={work.slug} href={work.externalUrl} target="_blank" rel="noopener noreferrer" className="work-link" style={{ color: "white", textDecoration: "none" }}>
                 <div className="square">
                   {thumbnail && <Image src={thumbnail} alt={work.title} fill sizes="(min-width: 1300px) 20vw, (min-width: 900px) 25vw, (min-width: 600px) 33vw, 50vw" />}
                 </div>
@@ -145,7 +147,7 @@ export default function WorksPage() {
           // PDF Project
           if (work.isPdf) {
             return (
-              <a key={work.slug} href={work.pdfPath} target="_blank" rel="noopener noreferrer" style={{ color: "white", textDecoration: "none" }}>
+              <a key={work.slug} href={work.pdfPath} target="_blank" rel="noopener noreferrer" className="work-link" style={{ color: "white", textDecoration: "none" }}>
                 <div className="square">
                   {thumbnail && <Image src={thumbnail} alt={work.title} fill sizes="(min-width: 1300px) 20vw, (min-width: 900px) 25vw, (min-width: 600px) 33vw, 50vw" />}
                 </div>
@@ -156,7 +158,7 @@ export default function WorksPage() {
 
           // Normal project
           return (
-            <Link key={work.slug} href={`/works/${work.slug}`} style={{ color: "white", textDecoration: "none" }}>
+            <Link key={work.slug} href={`/works/${work.slug}`} className="work-link" style={{ color: "white", textDecoration: "none" }}>
               <div className="square">
                 {thumbnail && <Image src={thumbnail} alt={work.title} fill sizes="(min-width: 1300px) 20vw, (min-width: 900px) 25vw, (min-width: 600px) 33vw, 50vw" />}
               </div>
