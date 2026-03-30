@@ -17,19 +17,24 @@ export async function generateMetadata({
   const work = works.find((w) => w.slug === slug);
   if (!work) return {};
 
+  const files = getWorkFiles(slug);
+  const firstImage = files.find((f) => /\.(jpg|jpeg|png|webp)$/i.test(f));
+  const description = work.description
+    ? work.description.slice(0, 160)
+    : `${work.title} — a work by Helga Wretman.`;
+
   return {
     title: work.title,
-    description: work.description
-      ? work.description.slice(0, 160)
-      : `${work.title} — a work by Helga Wretman.`,
+    description,
     alternates: { canonical: `/works/${slug}` },
     openGraph: {
       title: work.title,
-      description: work.description
-        ? work.description.slice(0, 160)
-        : `${work.title} — a work by Helga Wretman.`,
+      description,
       url: `https://helgawretman.com/works/${slug}`,
       type: "article",
+      ...(firstImage && {
+        images: [{ url: firstImage, alt: work.title }],
+      }),
     },
   };
 }
