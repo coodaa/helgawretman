@@ -10,7 +10,8 @@ export const metadata: Metadata = {
     description:
       "Helga Wretman — Berlin-based artist, performer and stunt woman. Born in Stockholm, works in video art, performance and digital culture.",
     url: "https://helgawretman.com/about",
-    type: "profile",
+    type: "website",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Helga Wretman" }],
   },
 };
 
@@ -106,8 +107,8 @@ export default function About() {
           visual artist. Helga Wretman explores the fake and real, possibilities and
           limitations of body, mind and technology.
 
-          Her work has been shown at for example Moscow Biannual for Young Art,
-          Bundes Kunsthalle Bonn, Lyon Biannual, Shirn Kunsthalle,
+          Her work has been shown at for example Moscow Biennial for Young Art,
+          Bundes Kunsthalle Bonn, Lyon Biennial, Schirn Kunsthalle,
           Berlinische Gallerie and Palais de Tokyo.
 
           Helga's artistic work lives in a symbiosis with her work as a stunt

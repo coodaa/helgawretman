@@ -31,17 +31,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const workPages: MetadataRoute.Sitemap = works.map((work) => {
-    const hasValidYear =
-      typeof work.year === "string" && /^\d{4}$/.test(work.year);
+  const workPages: MetadataRoute.Sitemap = works
+    .filter((work) => !work.isExternal && !work.isPdf)
+    .map((work) => {
+      const hasValidYear =
+        typeof work.year === "string" && /^\d{4}$/.test(work.year);
 
-    return {
-      url: `${baseUrl}/works/${work.slug}`,
-      changeFrequency: "yearly",
-      priority: 0.8,
-      ...(hasValidYear ? { lastModified: new Date(`${work.year}-01-01`) } : {}),
-    };
-  });
+      return {
+        url: `${baseUrl}/works/${work.slug}`,
+        changeFrequency: "yearly",
+        priority: 0.8,
+        ...(hasValidYear ? { lastModified: new Date(`${work.year}-01-01`) } : {}),
+      };
+    });
 
   return [...staticPages, ...workPages];
 }

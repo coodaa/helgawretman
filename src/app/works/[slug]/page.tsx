@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { works, getWorkFiles } from "../../data/works";
 import type { Metadata } from "next";
 
@@ -48,14 +49,7 @@ export default async function WorkDetail({
 
   const work = works.find((w) => w.slug === slug);
 
-  if (!work) {
-    return (
-      <main style={{ padding: 40, marginTop: "100px", color: "white" }}>
-        <h1>Work not found</h1>
-        <p>params.slug: {slug}</p>
-      </main>
-    );
-  }
+  if (!work) notFound();
 
   const files = getWorkFiles(slug);
 

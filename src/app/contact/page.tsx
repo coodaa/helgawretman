@@ -11,6 +11,7 @@ export const metadata: Metadata = {
       "Get in touch with Helga Wretman — email and Instagram contact for bookings and inquiries.",
     url: "https://helgawretman.com/contact",
     type: "website",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Helga Wretman" }],
   },
 };
 

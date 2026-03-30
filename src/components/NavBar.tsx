@@ -61,6 +61,7 @@ export default function NavBar() {
         <button
           onClick={() => setOpen(!open)}
           aria-label="Menu"
+          aria-expanded={open ? "true" : "false"}
           className="burger"
           style={{
             width: "28px",
