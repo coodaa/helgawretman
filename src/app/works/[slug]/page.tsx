@@ -53,6 +53,26 @@ export default async function WorkDetail({
 
   const files = getWorkFiles(slug);
 
+  const baseUrl = "https://helgawretman.com";
+  const videoFiles = files.filter((f) => /\.(mp4|mov|m4v)$/i.test(f));
+  const firstImage = files.find((f) => /\.(jpg|jpeg|png|webp)$/i.test(f));
+  const description = work.description
+    ? work.description.slice(0, 160)
+    : `${work.title} — a work by Helga Wretman.`;
+  const uploadDate = work.year ? `${work.year}-01-01` : "2020-01-01";
+
+  const videoSchemas = videoFiles.map((videoPath) => ({
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: work.title,
+    description,
+    thumbnailUrl: firstImage
+      ? `${baseUrl}${firstImage}`
+      : `${baseUrl}/og-image.jpg`,
+    uploadDate,
+    contentUrl: `${baseUrl}${videoPath}`,
+  }));
+
   // Hintergrundbilder
   const bgMobile =
     work.backgroundMobile || "/works/curiouser-and-curiouser/bgmobil.png";
@@ -130,6 +150,15 @@ export default async function WorkDetail({
           }
         }
       `}</style>
+
+      {/* VideoObject Structured Data */}
+      {videoSchemas.map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
 
       {/* Hintergrund + Overlay */}
       <div className="detail-bg" />
