@@ -147,6 +147,23 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         {children}
 
+        <footer style={{
+          textAlign: "center",
+          padding: "20px",
+          fontSize: "0.75rem",
+          opacity: 0.4,
+          color: "white",
+        }}>
+          <a
+            href="https://www.coodaa.de"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "white", textDecoration: "none" }}
+          >
+            coodaa.de
+          </a>
+        </footer>
+
         <Analytics />
         <SpeedInsights />
       </body>
