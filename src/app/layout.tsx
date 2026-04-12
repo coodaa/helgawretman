@@ -148,11 +148,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {children}
 
         <footer style={{
-          textAlign: "center",
-          padding: "20px",
+          position: "fixed",
+          bottom: "16px",
+          right: "20px",
           fontSize: "0.75rem",
           opacity: 0.4,
           color: "white",
+          zIndex: 999,
         }}>
           <a
             href="https://www.coodaa.de"
