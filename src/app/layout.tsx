@@ -151,8 +151,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           position: "fixed",
           bottom: "16px",
           right: "20px",
-          fontSize: "0.75rem",
-          opacity: 0.4,
+          fontSize: "0.85rem",
+          opacity: 0.5,
           color: "white",
           zIndex: 999,
         }}>
@@ -162,7 +162,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             rel="noopener noreferrer"
             style={{ color: "white", textDecoration: "none" }}
           >
-            coodaa.de
+            developed by coodaa.de
           </a>
         </footer>
 
