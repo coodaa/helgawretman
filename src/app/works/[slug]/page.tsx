@@ -24,12 +24,16 @@ export async function generateMetadata({
     ? work.description.slice(0, 160)
     : `${work.title} — a work by Helga Wretman.`;
 
+  const pageTitle = work.year
+    ? `${work.title} (${work.year})`
+    : work.title;
+
   return {
-    title: work.title,
+    title: pageTitle,
     description,
     alternates: { canonical: `/works/${slug}` },
     openGraph: {
-      title: work.title,
+      title: pageTitle,
       description,
       url: `https://helgawretman.com/works/${slug}`,
       type: "article",
@@ -72,6 +76,51 @@ export default async function WorkDetail({
     uploadDate,
     contentUrl: `${baseUrl}${videoPath}`,
   }));
+
+  const imageFiles = files.filter((f) => /\.(jpg|jpeg|png|webp)$/i.test(f));
+  const imageIndex = (i: number) =>
+    imageFiles.length > 1
+      ? `${work.title}${work.year ? ` (${work.year})` : ""}, image ${i + 1} of ${imageFiles.length} — Helga Wretman`
+      : `${work.title}${work.year ? ` (${work.year})` : ""} — Helga Wretman`;
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Works",
+        item: `${baseUrl}/works`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: work.title,
+        item: `${baseUrl}/works/${work.slug}`,
+      },
+    ],
+  };
+  const visualArtworkSchema =
+    videoFiles.length === 0 && imageFiles.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "VisualArtwork",
+          "@id": `${baseUrl}/works/${work.slug}#artwork`,
+          name: work.title,
+          description,
+          url: `${baseUrl}/works/${work.slug}`,
+          dateCreated: work.year ?? undefined,
+          creator: {
+            "@id": `${baseUrl}/#person`,
+            "@type": "Person",
+            name: "Helga Wretman",
+          },
+          image: imageFiles.map((img) => `${baseUrl}${img}`),
+          artform: "Photography",
+          artMedium: "Digital",
+        }
+      : null;
 
   // Hintergrundbilder
   const bgMobile =
@@ -160,6 +209,20 @@ export default async function WorkDetail({
         />
       ))}
 
+      {/* VisualArtwork Structured Data (image-only works) */}
+      {visualArtworkSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(visualArtworkSchema) }}
+        />
+      )}
+
+      {/* BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Hintergrund + Overlay */}
       <div className="detail-bg" />
       <div className="bg-overlay" />
@@ -194,13 +257,16 @@ export default async function WorkDetail({
         )}
 
         {/* Bilder & Videos */}
-        {files.map((file) =>
-          /\.(mp4|mov|m4v)$/i.test(file) ? (
-            <video key={file} src={file} controls className="media-item" />
-          ) : (
-            <Image key={file} src={file} alt={work.title} width={0} height={0} sizes="(min-width: 1000px) 550px, 650px" className="media-item" style={{ width: "100%", height: "auto" }} />
-          )
-        )}
+        {(() => {
+          let imgIdx = 0;
+          return files.map((file) =>
+            /\.(mp4|mov|m4v)$/i.test(file) ? (
+              <video key={file} src={file} controls className="media-item" />
+            ) : (
+              <Image key={file} src={file} alt={imageIndex(imgIdx++)} width={0} height={0} sizes="(min-width: 1000px) 550px, 650px" className="media-item" style={{ width: "100%", height: "auto" }} />
+            )
+          );
+        })()}
       </div>
     </main>
   );
